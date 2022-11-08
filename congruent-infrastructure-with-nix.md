@@ -4,22 +4,22 @@ author: Jesse Moore
 patat:
   eval:
     nix:
-      command: nix eval -f - 
+      command: nix eval -f -
       fragment: true
 ...
 
 # About Me.
 
-  Jesse Moore: Loving husband and cat dad
+  Jesse Moore
 
   - UAH Alumni:
-    - Master's of Science in Software Engineering 
+    - Master's of Science in Software Engineering
     - Bachelor's of Science in Computer Science
 
   - ADTRAN:
     - Software Development Engineer Sr. ~8-9 years.
 
-  - Contact: 
+  - Contact:
     - work:     jesse.moore@adtran.com
     - personal: jesse@jessemoore.dev
     - website:  jessemoore.dev
@@ -29,128 +29,114 @@ patat:
 
 # Initial thanks!
 
-  I was very excited to get this event going. I appreciate everyone who had a hand in making it happen!
+  I was very excited to get this event going. I appreciate everyone who had a
+  hand in making it happen!
 
   - Thanks to HuntFunc for providing a platform for this presentation!
   - Thanks to ADTRAN and the Tech Team for working to faciliate the event!
+  - This presentation is my own opinion and not representative of my
+      employer :)
 
 ---
 
 # HuntFunc Plug
 
-  Before getting started... Are you interested in functional programming? Do you live in the hunsville area?
-  If so, consider joining HuntFunc!
-
-  I actually don't know the official handles, but I can point you to where I look.
+  Before getting started... Are you interested in functional programming?
+  Do you live in the hunsville area? If so, consider joining HuntFunc!
 
   - Google group: https://groups.google.com/u/1/g/huntfunc
   - twitter: https://twitter.com/huntfunc
   - website: http://huntfunc.github.io/
 
-  I've only recently started looking at the group, the google group seems most active.
-
 ---
 
 # Let's Get Started!
 
-  The presentation today is: *Towards Congruent Infrastructure Management with Nix*
+  The presentation today is: *Congruent Infrastructure Management with Nix*
 
-  I'm gonna take a guess at some of the questions:
-  - What the heck is *Congruent Infrastructure*?
-  - Why the heck do I even want *Congruent Infrastructure*?
-  - What the heck is *Nix*?
-  - How the heck does *Nix* help make *Congruent Infrastructure*?
+  - What is *Congruent Infrastructure*?
+
+  - How does *Nix* help make *Congruent Infrastructure*?
+
   - What the heck does this have to do with functional programming???
-
-  Rest easy, all will be revealed in time! We'll break it down one at a time.
-
-  **Full Disclosure**: I think *Nix*-like systems **should** be the future of package management.
-  I don't think *Nix* itself is the future of software infrastructure management, but I 
-  think *Nix*-like systems are future of software infrastructure. Let me explain.
-
 
 ---
 
 # Software Infrastructure Management
 
   Some definitions:
-  - Infrastructure: The basic underlying framework or features of a system or 
+
+  - Infrastructure: The basic underlying framework or features of a system or
       organization.
+
   - Management: the act or manner of managing; handling, direction, or control.
 
-  To this end, software infrastructure management attempts to tackle how to best
-  control the underlying framework of software systems.
-
-  I strongly recommend giving *Why Order Matters: Turing Equivalence in Automated
-  Systems Administration* by Traugett and Brown a read, as it serves as the source
-  for the information in the following slides. 
+  *Why Order Matters: Turing Equivalence in Automated Systems Administration
+    by Traugett and Brow
 
 ---
 
-# Types of Software Infrastructure Management Methods 
+# Types of Software Infrastructure Management Methods
 
-  Traugett and Brown lay out 3 different types of management methodologies. These methodolgies
-  serve to relate the difference between the actual state of the physical disk of the machine
-  and the target state of the physical disk of the machine as time increases. The three types
-  are as follows:
+  - Traugett and Brown lay out 3 different types of management methodologies
+      - *Divergence*
+      - *Convergence*
+      - *Congruence*
 
-  - *Divergence*
-  - *Convergence*
-  - *Congruence*
+  These relate actual state of the disk to the inteded state of the disk as
+  time goes on.
 
 ---
 
 # Divergent Software Infrastructure Management
 
     Horizontal Axis: Time      x-line: target
-    Vertical Axis:   Disk      o-line: actual 
+    Vertical Axis:   Disk      o-line: actual
 
     |                      x x x x x
     |       x x x x x x x x
     |x x x x      o o o
     |o o o o o o o    o o o
     |                       o o o o
-    |                               o o o o o 
+    |                               o o o o o
     |
     ------------------------------------------
 
-  As time progresses, the intended state of the infrastructure and the actual state of the
-  infrastructure grow apart. 
+  As time progresses, the intended state of the infrastructure and the actual
+  state of the infrastructure grow apart.
 
-  This is the classic "It works on my machine" approach to software infrastructure management.
-  We pretty much all agree this is a nightmare.
+  "It works on my machine"
 
 ---
 
 # Convergent Software Infrastructure Management
 
     Horizontal Axis: Time      x-line: target
-    Vertical Axis:   Disk      o-line: actual 
+    Vertical Axis:   Disk      o-line: actual
 
     | x x x x
     |        x x x x x x x x x
     |                          x x x x x x
     |
-    |                            o o o o o 
-    |                  o o o o o 
+    |                            o o o o o
+    |                  o o o o
     |o o o o o o o o o
     ------------------------------------------
 
-  Convergent infrastructure management is characterized by the configuration of the live host
-  being mangaged moving towards (hence converging) on some hypothetical ideal baseline.
+  Convergent infrastructure management is characterized by the configuration
+  of the live host being mangaged moving towards (hence converging) on some
+  hypothetical ideal baseline.
 
-  This is your ansibles, your puppets, your chefs, and so on. They serve to make assured some
-  or all vital components of the infrastructure are in place. This does not mean however that
-  the host cannot change in other unforseen ways that break the deployment.
+  Ansible, Puppet, Chef, etc.
 
 ---
 
 # Congruent Software Infrastructure Management
 
     Horizontal Axis: Time      x-line: target
-    Vertical Axis:   Disk      o-line: actual 
+    Vertical Axis:   Disk      o-line: actual
 
-    |                                        x 
+    |
     |                                    x x o
     |                            x x x x o o
     |                          x o o o o
@@ -159,14 +145,12 @@ patat:
     |o o o o o o
     ------------------------------------------
 
-  Congruent infrastructure management is the process of maintaining all target hosts in
-  lockstep with some fully descriptive baseline. In other words, the intended state of the
-  system is defined formally with some description that is used to build the entirety of
-  the actual state.
+  Congruent infrastructure management is the process of maintaining all target
+  hosts in lockstep with some fully descriptive baseline. In other words, the
+  intended state of the system is defined formally with some description that
+  is used to build the entirety of the actual state.
 
-  Tools like Nix or GNU Guix are probably the most apt to fit with this label, where you
-  can write your configuration into some file and state of your infrastructure is then
-  derived from that file back to first principles in some standardized environment.
+  Nix, GNU Guix, etc.
 
 ---
 
@@ -175,26 +159,28 @@ patat:
   Here are some selling points for congruent infrastructure management:
 
     - deployments can be rapid and predictable.
+
     - Software infrastructure can be rebuilt on demand in a bit-for-bit
         identical state.
-    - Changes are not tested for the first time in production.
-    - Unscheduled production downtime is reduced to that caused by 
-        hardware and application problems; firefighting activities drop considerably.
-    - There are no ad-hoc or manual changes.
 
-  Convergence is certainly better than divergence. While convergence technologies like
-  ansible may be better than the wild west, it cannot boast the same as above.
+    - Changes are not tested for the first time in production.
+
+    - Unscheduled production downtime is reduced to that caused by hardware
+        and application problems; firefighting activities drop considerably.
+
+    - There are no ad-hoc or manual changes.
 
 ---
 
 # My personal conviction.
 
-  I spend a lot of time managing infrastructure for work while overseeing software
-  that can be deployed on VMs, deployed on OEM devices, deployed on in house silicon.
-
-  That software also has to be DEVELOPED by engineers at their desks and then BUILT
-  on any number of automation systems for actual release, for every component of our
-  final deliverable.
+  - A lot of time goes into managing infrastructure
+    - VMs
+    - OEM devices
+    - In-house hardware
+    - dev environments
+    - CI environments
+    - etc.
 
   Does anyone believe I do a good job at managing them all at once?
 
@@ -204,15 +190,11 @@ patat:
 
   **NO. I DON'T. I TRY. MY TEAM TRIES. WE DO NOT SUCCEED.**
 
-  I feel comfortable expressing that here, because I don't think anyone here would
-  expect every possible deployment method of every component to be tested manually
-  or in automation, it would take too many resources. If there were only one state
-  that I had to manage though, that problem becomes much easier, and suddenly 
-  testing all possible deployment scenarios becomes easy.
+  - It's not expected either, its an overall unrealistic expectation to have to
+    manage all that state from an ad-hoc fashion.
 
-  This is the real beauty of congruent infrastructure. It drives the state of the
-  machine, from and well defined input in a manner that can be maintained
-  in source control.
+  - Congruent infrastructure management serves to greatly deminish these pains
+    by being highly reliable and reproducible from source control.
 
 ---
 
@@ -223,7 +205,7 @@ patat:
 .          ▜███▙       ▜███▙  ▟███▛         .
 .           ▜███▙       ▜███▙▟███▛          .
 .            ▜███▙       ▜██████▛           .        - Nix is heavily overloaded, scream at me if it isn't
-.     ▟█████████████████▙ ▜████▛     ▟▙     .            clear which one I'm talking about :) 
+.     ▟█████████████████▙ ▜████▛     ▟▙     .            clear which one I'm talking about:
 .    ▟███████████████████▙ ▜███▙    ▟██▙    .
 .           ▄▄▄▄▖           ▜███▙  ▟███▛    .        - It could be any one of these things
 .          ▟███▛             ▜██▛ ▟███▛     .           * Nix the package manager - A system for highly reproducible builds
@@ -246,30 +228,28 @@ patat:
 
 # How does Nix work?
 
-  Nix as a package manager uses the Nix expression language to define package "derivations", these derivations serve as
-  a manifest for how to install the software package within the nix infrastructure. 
+  - Nix defines packages in .nix files, when it then builds into derivations
+    that describe the package. All inputs are other derivations.
 
-  Nix expressions are defined in .nix files, and derivations are defined in .drv files. You can kind of think of nix 
-  files like c files, and drv files like o files.
+  - .nix is to .div as .c is to .o
 
-  These derviations when they are build are stored in the `/nix/store` under under a cryptographic hash name. These can
-  then be used as inputs for other packages.
+  - derviations are stored in the `/nix/store` in a uniquely identifiabl
+    fashion.
 
-  Because of this, each derivation is unique, reproducable, and cacheable.
+  - hermetic design: each derivation is unique and reproducable.
 
 ---
 
 # Nix Expression language Overview
 
-  Nix expression language is defined by 3 paradigms.
+  When I think of Nix Expression Language, I think of 4 primary things.
 
-  * Lazy - Expressions are only evaluates as needed.
-  * Pure - Function output is determined only by function input. (no side effects)
-  * Functional - Programs are constructed by composing and applying functions to data.
-  * Dynamically Typed - Types are associated with values at runtime
-
-  Having mostly developed my own functional background in Haskell this was a great bonus for me. I can live with the
-  dynamic typing as a python developer by day.
+  - Lazy - Expressions are only evaluates as needed.
+  - Pure - Function output is determined only by function input. (no side
+    effects)
+  - Functional - Programs are constructed by composing and applying functions
+    to data.
+  - Dynamically Typed - Types are associated with values at runtime
 
 ---
 
@@ -303,7 +283,8 @@ patat:
 
 # Nix Expression Language Constructs - Let Bindings and Attribute sets
 
-  We can use `let ... in` bindings to create shorthands that can be used in the expression.
+  We can use `let ... in` bindings to create shorthands that can be used in the
+  expression.
 
   ```nix
   let
@@ -312,15 +293,15 @@ patat:
   in {a = y + x; b = y - x;}
   ```
 
-  This defines x and y for the scope and uses it to populate an attribute set. We
-  can access members of an attribute set with the `.` operator.
+  This defines x and y for the scope and uses it to populate an attribute set.
+  We can access members of an attribute set with the `.` operator.
 
   ```nix
   let
     x = 1;
     y = 3;
-  in 
-    #rec allows for recursive definitions in attribute sets!
+  i
+    # rec allows for recursive definitions in attribute sets!
     rec {
       a = y + x;
       b = 2*a - x;
@@ -340,7 +321,7 @@ patat:
   ```
 
   `inherit` is a shorthand to pull variables from the enclosing scope in.
- 
+
   ```nix
   let
     z = {x = 1; y = 3;};
@@ -348,7 +329,7 @@ patat:
   ```
 
   `import` will load a nix expression from a file.
- 
+
   ```nix
     # can import absolute and relative paths.
     import ./hello.nix
@@ -367,7 +348,8 @@ patat:
   in f
   ```
 
-  Since Nix is lazy, functions are only evaluated when invoked with an argument.
+  Since Nix is lazy, functions are only evaluated when invoked with a
+  argument.
 
   ```nix
   let
@@ -442,12 +424,10 @@ patat:
 
 # Nix Expression Language in closing.
 
-  Thats it! There is no way I could possibly explain all the intricacies, but I hope it's enough to
-  get a feel for how cool Nix is. Obviously, you can construct very complicated expressions from
-  these basic building blocks, but it should give you a basis to start understanding what you are 
-  looking at.
+  Thats it
 
-  From these rudamentary building blocks, an entire package ecosystem has been created.
+  From these rudamentary building blocks, an entire package ecosystem ha
+  been created.
 
 ---
 
@@ -459,29 +439,34 @@ patat:
   - atomic upgrades and rollback.
   - binary package caching.
 
-  Simply put, using all of the aspects of Nix together and blending it into a GNU/Linux
-  environment, you can define the configuration of an entire GNU/Linux system in one
-  domain specific language for linux infrastructure management. This experience is NixOS.
+  Simply put, using all of the aspects of Nix together and blending it
+  into a GNU/Linux environment, you can define the configuration of an entire
+  GNU/Linux system in one domain specific language for linux infrastructure
+  management. This experience is NixOS.
 
 ---
 
 # Back to the topic at hand.
 
-  So hopefully it is clearer now, how Nix can help with our goal of attaining congruent architecture.
+  So hopefully it is clearer now, how Nix can help with our goal of
+  attaining congruent architecture.
 
-  When our DSL is purely functional, it becomes possible to relentlessly define everything as a collection
-  of inputs that correspond to an output.
+  When our package DSL is purely functional, it enforces each package to be
+  nothing more than a series of inputs that correspond to an output.
 
-  Using this approach, we can declaratively define the entire state of our system in a way that is not only
-  *actionable*, but **reproducible** as well. Not only can we take the configuration and use it to create
-  the state of the system (hense, congruent), but anyone else who satisfies the inputs of the configuration
-  can use it as well.
+  Using this approach, we can declaratively define the entire state of ou
+  system in a way that is not only *actionable*, but **reproducible** as well.
+  Not only can we take the configuration and use it to create the state of the
+  system (hense, congruent), but anyone else who satisfies the inputs of the
+  configuration can use it as well.
 
 ---
 
 # Demo (if possible)
 
   I can demonstrate a live config change on my device if I didn't sandbag too hard.
+
+  https://github.com/jesseDMoore1994/nix-config
 
 ---
 
