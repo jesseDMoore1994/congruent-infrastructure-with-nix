@@ -33,7 +33,9 @@ patat:
   hand in making it happen!
 
   - Thanks to HuntFunc for providing a platform for this presentation!
+
   - Thanks to ADTRAN and the Tech Team for working to faciliate the event!
+
   - This presentation is my own opinion and not representative of my
       employer :)
 
@@ -45,7 +47,9 @@ patat:
   Do you live in the hunsville area? If so, consider joining HuntFunc!
 
   - Google group: https://groups.google.com/u/1/g/huntfunc
+
   - twitter: https://twitter.com/huntfunc
+
   - website: http://huntfunc.github.io/
 
 ---
@@ -71,7 +75,7 @@ patat:
 
   - Management: the act or manner of managing; handling, direction, or control.
 
-  *Why Order Matters: Turing Equivalence in Automated Systems Administration
+  *Why Order Matters: Turing Equivalence in Automated Systems Administration*
     by Traugett and Brow
 
 ---
@@ -83,7 +87,7 @@ patat:
       - *Convergence*
       - *Congruence*
 
-  These relate actual state of the disk to the inteded state of the disk as
+  These relate actual state of the disk to the intended state of the disk as
   time goes on.
 
 ---
@@ -174,7 +178,7 @@ patat:
 
 # My personal conviction.
 
-  - A lot of time goes into managing infrastructure
+  - A lot of my time goes into managing infrastructure
     - VMs
     - OEM devices
     - In-house hardware
@@ -182,7 +186,7 @@ patat:
     - CI environments
     - etc.
 
-  Does anyone believe I do a good job at managing them all at once?
+  Does anyone believe they do a good job managing them all at once?
 
 ---
 
@@ -245,10 +249,13 @@ patat:
   When I think of Nix Expression Language, I think of 4 primary things.
 
   - Lazy - Expressions are only evaluates as needed.
+
   - Pure - Function output is determined only by function input. (no side
     effects)
+
   - Functional - Programs are constructed by composing and applying functions
     to data.
+
   - Dynamically Typed - Types are associated with values at runtime
 
 ---
@@ -300,7 +307,7 @@ patat:
   let
     x = 1;
     y = 3;
-  i
+  in
     # rec allows for recursive definitions in attribute sets!
     rec {
       a = y + x;
@@ -316,7 +323,7 @@ patat:
 
   ```nix
   let
-    z = {x = 1; y = 3;};
+    z = { x = 1; y = 3; };
   in with z; {a = y + x; b = y - x;}
   ```
 
@@ -324,8 +331,8 @@ patat:
 
   ```nix
   let
-    z = {x = 1; y = 3;};
-  in { inherit z;}
+    z = { x = 1; y = 3; };
+  in { inherit z; }
   ```
 
   `import` will load a nix expression from a file.
@@ -424,9 +431,9 @@ patat:
 
 # Nix Expression Language in closing.
 
-  Thats it
+  Thats it!
 
-  From these rudamentary building blocks, an entire package ecosystem ha
+  From these rudamentary building blocks, an entire package ecosystem has
   been created.
 
 ---
@@ -436,7 +443,9 @@ patat:
   NixOS is a Nix flavored linux distribution. Some key features include:
 
   - reproducible and declarative system management.
+
   - atomic upgrades and rollback.
+
   - binary package caching.
 
   Simply put, using all of the aspects of Nix together and blending it
@@ -454,7 +463,7 @@ patat:
   When our package DSL is purely functional, it enforces each package to be
   nothing more than a series of inputs that correspond to an output.
 
-  Using this approach, we can declaratively define the entire state of ou
+  Using this approach, we can declaratively define the entire state of our
   system in a way that is not only *actionable*, but **reproducible** as well.
   Not only can we take the configuration and use it to create the state of the
   system (hense, congruent), but anyone else who satisfies the inputs of the
@@ -472,8 +481,9 @@ patat:
 
 # Questions?
 
-  This slide deck is available on github.
+  Let me know how you feel about this presentation, I'd love to do more presentations
+  on the topic. Some questions might be a good presentation for the future!
 
-  https://github.com/jesseDMoore1994/congruent-infrastructure-with-nix
+  slides: https://github.com/jesseDMoore1994/congruent-infrastructure-with-nix
 
 ---
