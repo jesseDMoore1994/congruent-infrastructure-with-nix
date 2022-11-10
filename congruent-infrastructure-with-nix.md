@@ -82,7 +82,7 @@ patat:
 
 # Types of Software Infrastructure Management Methods
 
-  - Traugett and Brown lay out 3 different types of management methodologies
+  - Traugott and Brown lay out 3 different types of management methodologies
       - *Divergence*
       - *Convergence*
       - *Congruence*
