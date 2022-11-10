@@ -76,7 +76,7 @@ patat:
   - Management: the act or manner of managing; handling, direction, or control.
 
   *Why Order Matters: Turing Equivalence in Automated Systems Administration*
-    by Traugett and Brow
+    by Steve Traugott and Lance Brown
 
 ---
 
